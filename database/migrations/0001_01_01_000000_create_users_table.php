@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            // $table->string('profile_picture')->nullable()->after('email');
+            $table->string('profile_photo_path')->nullable()->after('email');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -45,5 +47,9 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('profile_picture');
+        Schema::dropIfExists('profile_photo_path');
+
+      
     }
 };

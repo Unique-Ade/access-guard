@@ -16,6 +16,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/profile', [ProfileController::class, 'uploadProfilePicture'])->name('profile.upload');
 });
 
 
@@ -28,11 +29,11 @@ Route::get('/auth/github/callback', function () {
     $user = Socialite::driver('github')->user();
 
     // $user->token
-    
+
 });
 
 // Route::get('testroute', function(){
 //     Mail::to('adeolaportfolioproject@gmail.com')->send()
 // });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

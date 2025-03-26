@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
+    
     /**
      * Display the user's profile form.
      */
@@ -56,5 +59,30 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function uploadProfilePicture(Request $request)
+    {
+        $request->validate([
+            'profile_photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate image format
+        ]);
+
+        $user = Auth::user();
+
+        // Delete old profile photo if exists
+        if ($user->profile_photo_path) {
+            Storage::delete('public/' . $user->profile_photo_path);
+        }
+
+        // Store new profile photo
+        $path = $request->file('profile_photo')->store('profile_photos', 'public');
+
+        // Update user profile
+
+        $user->update([
+            'profile_photo_path' => $path,
+        ]);
+
+        return back()->with('success', 'Profile picture updated successfully.');
     }
 }
