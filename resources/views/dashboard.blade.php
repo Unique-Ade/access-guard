@@ -24,5 +24,21 @@
             
         </div>
     </div>
+
+    <div class="max-w-2xl mx-auto mt-5">
+        <h4 class="font-bold text-lg mb-4">Recent Activities</h4>
+    
+        <ul class="space-y-2">
+            @forelse($activities as $activity)
+                <li class="p-2 bg-gray-100 rounded">
+                    {{ $activity->activity }} 
+                    <span class="text-sm text-gray-500">({{ $activity->created_at->diffForHumans() }})</span>
+                </li>
+            @empty
+                <li>No activities found.</li>
+            @endforelse
+        </ul>
+    </div>
+    
    
 </x-app-layout>

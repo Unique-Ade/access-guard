@@ -3,13 +3,20 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use App\Models\UserActivity;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $userId = Auth::id();
+    $activities = UserActivity::where('user_id',  $userId)
+    ->latest()
+    ->take(10)
+    ->get();
+    return view('dashboard' , compact('activities'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

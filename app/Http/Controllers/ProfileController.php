@@ -10,10 +10,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\User;
+use App\Models\UserActivity;
 
 class ProfileController extends Controller
 {
-    
+
     /**
      * Display the user's profile form.
      */
@@ -36,6 +37,8 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+        // Log the activity immediately after updating
+        logActivity('Updated Profile Settings');
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
@@ -51,6 +54,8 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
+        logActivity('Logged out of the system');
+
         Auth::logout();
 
         $user->delete();
@@ -60,6 +65,8 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+
 
     public function uploadProfilePicture(Request $request)
     {
@@ -82,7 +89,17 @@ class ProfileController extends Controller
         $user->update([
             'profile_photo_path' => $path,
         ]);
+        logActivity('Updated Profile Picture');
 
         return back()->with('success', 'Profile picture updated successfully.');
     }
+
+
+
+
+
+    // Continue with your logic...
+
+
+
 }
