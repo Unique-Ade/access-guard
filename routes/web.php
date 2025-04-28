@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\ProfileController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\UserActivity;
 use Illuminate\Support\Facades\Auth;
@@ -28,10 +29,14 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::middleware(['auth', AdminMiddleware::class])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+// Route::middleware(['auth', AdminMiddleware::class])->group(function () {
+//     Route::get('/admin/dashboard', function () {
+//         return view('admin.dashboard');
+//     })->name('admin.dashboard');
+// });
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 
