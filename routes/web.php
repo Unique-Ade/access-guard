@@ -6,6 +6,11 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\UserActivity;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\RequestController;
+use App\Http\Controllers\Admin\LogController;
+use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -38,6 +43,12 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+    Route::get('/requests', [RequestController::class, 'index'])->name('requests.index');
+    Route::get('/logs', [LogController::class, 'index'])->name('logs.index');
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
 });
 
 
