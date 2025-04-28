@@ -11,13 +11,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/user-dashboard', function () {
+Route::get('/dashboard', function () {
     $userId = Auth::id();
     $activities = UserActivity::where('user_id',  $userId)
         ->latest()
         ->take(10)
         ->get();
-    return view('dashboard', compact('activities'));
+    return view('user_dashboard', compact('activities'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
