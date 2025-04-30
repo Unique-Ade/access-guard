@@ -38,7 +38,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
         // Log the activity immediately after updating
-        logActivity('Updated Profile Settings');
+        logActivity('Updated their profile');
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }

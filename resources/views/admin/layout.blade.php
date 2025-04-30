@@ -37,11 +37,11 @@
     <div class="sidebar">
         <h2>Admin Panel</h2>
         <a href="{{ route('admin.dashboard') }}">Dashboard</a>
-        <a href="#">User Management</a>
-        <a href="#">Roles & Permissions</a>
-        <a href="#">Pending Requests</a>
-        <a href="#">System Logs</a>
-        <a href="#">Settings</a>
+        <a href="{{ route('admin.users.index') }}">User Management</a>
+        <a href="{{ route('admin.roles.index') }}">Roles & Permissions</a>
+        <a href="{{ route('admin.requests.index') }}">Pending Requests</a>
+        <a href="{{ route('admin.logs.index') }}">System Logs</a>
+        <a href="{{ route('admin.settings.index') }}">Settings</a>
     </div>
 
     <div class="content">
