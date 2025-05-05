@@ -2,7 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Events\Registered;
+use Illuminate\Auth\Events\Registered;
+use App\Models\UserActivity;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -19,8 +20,13 @@ class LogRegisteredUser
     /**
      * Handle the event.
      */
-    public function handle(Registered $event): void
+    public function handle(Registered $event)
     {
-        //
+        $user = $event->user;
+
+        UserActivity::create([
+            'user_id' => $user->id,
+            'activity' => 'New user ' . $user->name . ' registered',
+        ]);
     }
 }
