@@ -13,11 +13,11 @@
             <h4>Active Users</h4>
             <p style="font-size: 24px; font-weight: bold;">{{ $activeUsers }}</p>
         </div>
-
         <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-            <h4>Pending Requests</h4>
+            <h3 class="text-lg font-bold text-yellow-800">Pending Requests</h3>
             <p style="font-size: 24px; font-weight: bold;">{{ $pendingRequests }}</p>
         </div>
+        
     </div>
 
     <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">

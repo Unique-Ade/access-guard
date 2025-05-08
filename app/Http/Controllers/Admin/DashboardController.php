@@ -14,9 +14,9 @@ class DashboardController extends Controller
     {
         $totalUsers = User::count();
         $activeUsers = User::whereNotNull('email_verified_at')->count();
-        $pendingRequests = 0; // 
+        $pendingRequests = PendingRequest::where('status', 'pending')->count();; // 
 
-        $recentActivities = UserActivity::latest()->take(5)->get();
+        $recentActivities = UserActivity::latest()->take(10)->get();
          
         return view('admin.dashboard', compact(
             'totalUsers',
