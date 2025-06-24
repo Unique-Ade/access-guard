@@ -58,8 +58,15 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admi
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::get('/pending-requests', [PendingRequestController::class, 'index'])->name('pending-requests.index');
 
-    Route::post('/pending-requests/{id}/approve', [PendingRequestController::class, 'approve'])->name('pending-requests.approve');
-    Route::post('/pending-requests/{id}/reject', [PendingRequestController::class, 'reject'])->name('pending-requests.reject');
+    Route::post('/pending-requests/{id}/approve', [PendingRequestController
+    ::class, 'approve'])->name('pending-requests.approve');
+    Route::post('/pending-requests/{id}/reject', [PendingRequestController
+    ::class, 'reject'])->name('pending-requests.reject');
+
+    Route::patch('/users/{user}/role', [UserController::class, 'updateRole'])->name('users.updateRole');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
+
 });
 
 Route::middleware(['auth'])->group(function () {
