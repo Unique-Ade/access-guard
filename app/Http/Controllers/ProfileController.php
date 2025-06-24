@@ -66,40 +66,33 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
+    public function uploadProfilePicture(Request $request) 
+{
+    /** @var \App\Models\User $user */
+    $user = Auth::user();
 
+    // Validate the image
+    $request->validate([
+        'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-    public function uploadProfilePicture(Request $request)
-    {
-        $request->validate([
-            'profile_photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate image format
-        ]);
+    // Store and save the image
+    if ($request->hasFile('profile_image')) {
+        $image = $request->file('profile_image');
+        $path = $image->store('profile_images', 'public'); // saves to storage/app/public/profile_images
 
-        $user = Auth::user();
-
-        // Delete old profile photo if exists
-        if ($user->profile_photo_path) {
-            Storage::delete('public/' . $user->profile_photo_path);
+        // Delete the old image
+        if ($user->profile_image) {
+            Storage::disk('public')->delete($user->profile_image);
         }
 
-        // Store new profile photo
-        $path = $request->file('profile_photo')->store('profile_photos', 'public');
+        $user->profile_image = $path;
+        $user->save();
 
-        // Update user profile
-
-        $user->update([
-            'profile_photo_path' => $path,
-        ]);
-        logActivity('Updated Profile Picture');
-
-        return back()->with('success', 'Profile picture updated successfully.');
+        return back()->with('status', 'Profile picture updated successfully!');
     }
 
-
-
-
-
-    // Continue with your logic...
-
-
+    return back()->withErrors(['profile_image' => 'No image uploaded.']);
+}
 
 }

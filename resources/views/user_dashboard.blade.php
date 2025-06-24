@@ -4,18 +4,56 @@
             {{ __('Dashboard') }}
         </h2>
 
-        <div class="flex items-center space-x-2 mt-4">
-            <button id="theme-toggle"
-                class="relative w-12 h-6 bg-gray-300 rounded-full p-1 dark:bg-gray-600 transition-colors duration-300 overflow-hidden">
-                <div id="toggle-circle"
-                    class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300">
-                </div>
-            </button>
-        </div>
+      <br>
+
+        <!-- Dark Mode Toggle -->
+        <label class="relative inline-block w-12 h-6 cursor-pointer">
+            <!-- Hidden checkbox with peer -->
+            <input type="checkbox" id="theme-toggle" class="sr-only peer">
+
+            <!-- Track -->
+            <div class="w-full h-full bg-gray-300 dark:bg-gray-700 rounded-full transition-colors duration-300"></div>
+
+            <!-- Knob -->
+            <div
+                class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300 peer-checked:translate-x-6">
+            </div>
+        </label>
+
+          <script>
+    const themeToggle = document.getElementById('theme-toggle');
+
+    // Load initial state
+    if (localStorage.theme === 'dark') {
+        document.documentElement.classList.add('dark');
+        themeToggle.checked = true;
+    }
+
+    themeToggle.addEventListener('change', () => {
+        if (themeToggle.checked) {
+            document.documentElement.classList.add('dark');
+            localStorage.theme = 'dark';
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.theme = 'light';
+        }
+    });
+</script>
+
+
+
+
 
 
 
     </x-slot>
+
+    {{-- @if (auth()->user()->profile_image)
+    <img src="{{ asset('storage/' . auth()->user()->profile_image) }}" alt="Profile Image"
+        class="w-24 h-24 rounded-full object-cover m-16 mt-8 mb-0">
+    @else
+    <p>No profile image uploaded.</p>
+    @endif --}}
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -27,6 +65,7 @@
 
         </div>
     </div>
+
 
     <div class="max-w-2xl mx-auto mt-5">
         <h4 class="font-bold text-lg mb-4">Recent Activities</h4>
@@ -46,7 +85,7 @@
     <div class="alert alert-success mt-2">{{ session('status') }}</div>
     @endif
 
-   
+
 
 
 </x-app-layout>

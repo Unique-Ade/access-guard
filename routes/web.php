@@ -65,8 +65,7 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admi
 
     Route::patch('/users/{user}/role', [UserController::class, 'updateRole'])->name('users.updateRole');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-
-
+    Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
 });
 
 Route::middleware(['auth'])->group(function () {

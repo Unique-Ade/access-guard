@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class RoleController extends Controller
 {
     public function index()
     {
-        return view('admin.roles.index');
+        $admins = User::where('role', 'admin')->get();
+        $users = User::where('role', 'user')->get();
+
+        return view('admin.roles.index', compact('admins', 'users'));
     }
 }
