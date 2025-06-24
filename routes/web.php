@@ -15,6 +15,10 @@ use App\Http\Controllers\Admin\LogController;
 use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\PendingRequestController;
+use App\Http\Controllers\User\RequestController as UserRequestController;
+
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -54,6 +58,8 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admi
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::get('/pending-requests', [PendingRequestController::class, 'index'])->name('pending-requests.index');
 
+    Route::post('/pending-requests/{id}/approve', [PendingRequestController::class, 'approve'])->name('pending-requests.approve');
+    Route::post('/pending-requests/{id}/reject', [PendingRequestController::class, 'reject'])->name('pending-requests.reject');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -71,6 +77,10 @@ Route::middleware(['auth'])->group(function () {
 
         return redirect()->route('request.access')->with('status', 'Request submitted successfully!');
     })->name('request.access.submit');
+
+
+    Route::post('/request-role-upgrade', [UserRequestController::class, 'requestRoleUpgrade'])
+        ->name('user.request.upgrade');
 });
 
 
@@ -84,6 +94,16 @@ Route::get('/auth/github/callback', function () {
     // $user->token
 
 });
+
+
+
+
+
+// Route::middleware('auth')->group(function () {
+//     Route::post('/request-role-upgrade', [RequestController::class, 'requestRoleUpgrade'])
+//         ->name('user.request.upgrade');
+// });
+
 
 // Route::get('testroute', function(){
 //     Mail::to('adeolaportfolioproject@gmail.com')->send()
