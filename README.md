@@ -83,6 +83,24 @@ php artisan db:seed
 php artisan serve
 
 
-## 🙋‍♂️ Author - Adeola Gabriel Olagbenro
-📧 olagbenrogabriel@gmail.com
-🔗 LinkedIn - https://www.linkedin.com/in/olagbenro-adeola/
+## 🙋‍♂️ Author
+ 
+- **Name**: Adeola Gabriel Olagbenro
+- **Email**: 📧 olagbenrogabriel@gmail.com
+- **GitHub**: 🔗 [Unique-Ade](https://github.com/Unique-Ade)
+- **LinkedIn**:🔗 [Adeola Olagbenro](https://www.linkedin.com/in/olagbenro-adeola/)
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## Contact
+
+If you have any questions or feedback, feel free to reach out:
+- Email: olagbenrogabriel@gmail.com
+- GitHub: [Unique-Ade](https://github.com/Unique-Ade)
+- LinkedIn: [Adeola Olagbenro](https://www.linkedin.com/in/olagbenro-adeola/)
