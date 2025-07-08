@@ -1,4 +1,4 @@
-# Laravel Admin Dashboard & User Management System
+# Access-Guard - Laravel Admin Dashboard & User Management System
 
 A robust Laravel-based web application featuring a user management system, role-based access control, pending request handling, activity logs, system settings, and profile management including image uploads. Built with a focus on extensibility, admin oversight, and real-time user interaction.
 
