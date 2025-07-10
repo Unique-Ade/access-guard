@@ -86,7 +86,7 @@ php artisan db:seed
 
 # Serve the app
 php artisan serve
-
+```
 
 ## 🙋‍♂️ Author
  
